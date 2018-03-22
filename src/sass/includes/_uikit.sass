@@ -1,0 +1,262 @@
+// ------------------------------------
+// The debug meta tags makes visible
+// the meta and og tags inside any pg
+// helped by a little javascript.
+// if $debug-mode: false in _var.scss
+// nothing happens
+// ------------------------------------
+@if $meta-tags
+	ul.debug-og
+		$c: $dark
+		color: invert($c)
+		+position(absolute)
+		max-width: 600px
+		background-color: transparentize($c, .1)
+		z-index: 9999999999999999
+		padding: $boxpad/2
+		font-size: $small-fs
+		line-height: $small-fs + 0.2
+		overflow-y: scroll
+		
+		li
+			margin-bottom: $boxpad/2
+			border-top: 1px solid $c
+			position: relative
+			clear: both
+			+display-flex
+			// +clearfix
+		
+		i, b, em
+			padding: 17px 15px 5px 0px
+			display: inline-block
+			position: relative
+			
+			&:before
+				color: transparentize(invert($c), .6)
+				background-color: $c
+				font-size: 11px
+				display: block
+				line-height: 12px
+				padding: 1px 3px
+				font-weight: 500
+				+position(absolute, 0px, auto, auto, 0px)
+		
+		b
+			font-weight: normal
+			// background-color: transparentize(blue, .3)
+			&:before
+				content: 'description'
+		
+		i
+			min-width: 25%
+			font-style: normal
+			// background-color: transparentize(fuchsia, .3)
+			&:before
+				content: 'name'
+
+		em
+			&:before
+				background-color: fuchsia!important
+				color: black!important
+			min-width: 25%
+			font-style: normal
+			&:before
+				content: 'property'
+@else
+	ul.debug-og
+		+hide
+
+// -------------------------------------------
+// observe element nesting by using this class
+// -------------------------------------------
+=highlight($c)
+	background: fade-out(blue, $c)
+	> * 
+		background: fade-out(fuchsia, $c)
+		> * 
+			background: fade-out(fuchsia, $c)
+			> * 
+				background: fade-out(fuchsia, $c)
+
+.highlight
+	+highlight(.8)
+
+
+// ----------------------------------
+// Simply just docs.
+// ----------------------------------
+
+.ui-blackhead
+	background: $black
+	color: $white
+	padding: $boxpad/2
+	margin-bottom: $boxpad
+
+
+
+// ------------------------------------
+// Bring up an overlaying grid to test
+// element fitting.
+// ------------------------------------
+.grid-overlay
+	@if $grid-overlay == true
+		do nothign
+	@else
+		display: none
+
+	z-index: 666
+	background: fade-out(pink, 0.8)
+	// +stretch
+	+position(fixed, 0, 0, 50%, 0)
+.grid-layer
+	// margin: 0 auto
+	background: fade-out(blue, 0.8)
+	height: 100%
+	.row
+		height: 100%
+		> div
+			height: 100% !important
+			position: relative
+			&:after
+				content: ''
+				+position(absolute, 0, $grid-gutter-width-base/2, 0, $grid-gutter-width-base/2)
+				background: fade-out(black, 0.9)
+
+
+
+
+// -----------------------------------
+// UI KIT DOCS - work in progress
+// -----------------------------------
+
+// always using ul and li
+// .ui-grid
+// .ui-icons
+// .ui-type
+// .ui-buttons
+// .ui-forms
+// .ui-palette
+
+// we need the paddings because we work with them
+@if $uikit
+	.uikit
+		> section
+			margin-bottom: $boxpad * 2
+@else
+	.uikit
+		+hide
+
+.ui-header
+	margin-bottom: $boxpad
+
+	// > li
+	// 	margin-bottom: 10px
+	// 	display: inline-block
+	// 	vertical-align: top
+	// h1, h2, h3, h4, h5
+	// 	width: 100%
+	// 	display: block
+
+
+
+// Documenting Typography
+.ui-type
+	.row
+		h1
+			+showunit($h1-fs)
+		h2
+			+showunit($h2-fs)
+		h3
+			+showunit($h3-fs)
+		h4
+			+showunit($h4-fs)
+		h5
+			+showunit($h5-fs)
+
+
+section	
+	&.ui-grid
+	// shows different examples of grid use with responsive
+	// grid gutter changes on smaller breakpoints.
+	
+	&.ui-icons
+		// shows all icons used in the layout with different sizes
+		.ico
+			+highlight(.95)
+			
+
+	// exemplifies headings h1 to h5 base fontsize, small and big.
+	&.ui-buttons
+	// exemplifies all possible buttons instances
+	&.ui-forms
+	// all ui forms elements staring from the smallest unit up
+	// to more complex combos. Needs revision of main forms file
+	// and extended documentation.
+	&.ui-palette
+	// all colors used in the design.
+	&.ui-spacings
+	// In the design we are using different margins and paddings
+	// often used in the ui-elements. needs to be documented here
+	&.ui-element
+	// contains any user interface element. extended documentation exists
+	// in the original file.
+
+.ui-grid
+	.row
+		+highlight(.95)
+	// min-height: 100px
+	// background: fade-out(pink, .3)
+
+// 
+.ui-buttons
+	li
+		.btn
+			margin-right: $boxpad/3
+			&.block
+				margin-bottom: $boxpad/3
+
+		display: block
+		margin-bottom: $boxpad/2
+
+
+// Swatches --------------------
+
+.swatches
+	+clearfix
+	display: block
+	li
+		display: block
+		&:before
+			content: ''
+			+size(50px)
+			display: inline-block
+			margin-right: 15px
+			vertical-align: middle
+
+.ctg-green:before
+	background-color: $ctg-green
+.ctg-velvet:before
+	background-color: $ctg-velvet
+.ctg-blue:before
+	background-color: $ctg-blue
+.color-dark:before
+	background-color: $dark
+.color-gray:before
+	background-color: $gray
+.color-gray-light:before
+	background-color: $gray-light
+.color-green:before
+	background-color: $green
+.color-red:before
+	background-color: $red
+.color-blue:before
+	background-color: $blue
+.color-yellow:before
+	background-color: $yellow
+
+
+
+
+
+
+

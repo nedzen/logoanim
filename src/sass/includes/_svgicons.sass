@@ -1,0 +1,71 @@
+// Icon svg
+
+svg
+	+position(stretch)
+	+size(100%)
+
+// sizing mixin
+=svg($w, $wr:50, $hr:50)
+	+size($w, 0)
+	padding-top: ($hr / $wr) * $w // h / w
+
+.ico
+	position: relative // this is required
+	+svg(19px)
+	svg
+		fill: $dark
+		stroke: $dark
+
+	// setting widths and bounding boxes
+	// for svg icons of different size.
+	// --------------------------------
+
+	// - 230 28
+	&.logo
+		+svg(100%, 230, 28)
+
+	//- 30x30
+	&.burger,
+	&.search
+		+svg(27px)
+
+		// svg
+			// stroke: blue
+
+	//- 22x22
+	&.share
+		+svg(22px)
+		// svg
+			// stroke: olive
+
+	//- 25x19
+	&.youtube
+		+svg(23px, 25, 19)
+		// svg
+			// fill: red
+	&.mail
+		+svg(25px, 26, 19)
+	//- 26x19
+	&.newsletter
+		+svg(26px, 26, 19)
+		// svg
+			// fill: purple
+
+	//- 23x19
+	&.medium
+	&.tw
+		// svg
+		// fill: blue
+
+	// 19x19
+	&.fb,
+	&.insta,
+	&.mess,
+	&.rss,
+	&.close
+		// sizes are 19 (default)
+		// svg
+			// fill: pink
+
+.ico.arrow-back
+	// +rotate(180deg)

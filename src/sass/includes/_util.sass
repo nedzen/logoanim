@@ -1,0 +1,231 @@
+// ------------------------------------------
+// notice info | a way to inform about different messages
+// ------------------------------------------
+// use like this : 
+// <div class="notice [info, alert, success. error]"> text inside
+
+// @include keyframes(shonotif)
+// 	10%, 90%
+// 		padding-top: $boxpad/2
+// 		padding-bottom: $boxpad/2
+// 		max-height: 150px
+	
+// 	100%, 0%
+// 		padding-top: 0
+// 		padding-bottom: 0
+// 		max-height: 0
+
+// fill: white
+
+// @include keyframes(shonotif)
+// 	from
+// 		max-height: 150px
+		
+// 	to
+// 		max-height: 0px
+
+// .notice
+	> div
+		padding: $boxpad/4 $boxpad $boxpad/4 $boxpad/4
+	
+	+animation(shonotif 400ms steps(60) forwards)
+	animation-delay: 5s
+	+position(absolute, 0px, 0px, auto, 0px)
+	z-index: 99999999999999999999999999999999
+	overflow: hidden
+	color: white
+	border-radius: 1px
+	box-shadow: 0 2px 0 0 rgba(0,0,0,0.1)
+	
+	// margin-left: auto
+	// margin-right: auto
+	
+	&.success
+		background-color: transparentize($green, .1)
+
+	// &.info
+	// 	background-color: $blue
+
+	&.alert
+		background-color: transparentize($red, .1)
+
+	&.error
+		background-color: transparentize($red, .1)
+
+	// &:before
+	// 	content: ''
+	// 	+position(stretch)
+	// 	padding: $boxpad
+	// 	display: block
+	
+	button.close
+		+size(19px)
+		padding: 0!important
+		background: transparent!important
+		border: 0
+		+position(absolute, 10px, 10px, auto, auto)
+		cursor: pointer
+		.ico svg
+			stroke: $white
+			// opacity: .6
+		&:hover
+			opacity: 1
+			.ico svg
+				stroke: $black
+				// opacity: 1
+
+body > .notice
+	// box-sizing: content-box
+	// +position(absolute, 0, 0, auto, 0)
+	// position: relative
+	// z-index: 999999999999999999
+	// height: 0!important
+	// overflow: hidden!important
+	// padding: 0!important
+	
+	// +transition(900ms)
+
+.center
+	text-align: center
+
+.fl
+	float: left
+
+.fr
+	float: right
+
+
+// ------------------------------------
+
+
+
+
+
+// This is generic
+.show-more
+	text-align: center
+	padding: 0 0 $boxpad 0
+
+
+
+
+// ===================================
+// UI PARTS
+// ===================================
+
+=avatar($x:100%, $y:nill)
+	overflow: hidden
+	img
+		border-radius: 50%
+	
+	@if $x
+		+size($x)
+	@if $y == fl
+		float: left
+	@else if $y == fr
+		float: right
+	@else if $y == center
+		+mx-center
+	@else
+		/*do nothing - probably something is wrong*/
+	img
+		+size(100%, auto)
+
+// generic avatar
+.avatar
+	+avatar
+
+
+ul.list-inline
+	margin: 0
+	padding: 0
+	li 
+		display: inline-block
+		margin-right: 5px
+
+.mb30
+	margin-bottom: 30px
+
+// Utilities ------–------–------–------–
+// The utilities file contains all the mixins and classes
+// employed in the development phase. This code should not
+// appear on a website in production.
+
+// 1) - showunit
+// 2) - debug
+// 3) - grid-overlay
+
+// comes with a bunch of mixins.
+=showunit($a)
+	position: relative
+	*
+		position: relative
+	&:hover
+		&:before
+			opacity: 1
+	&:before
+		+transition(300ms)
+		opacity: 0.3
+		content: '#{$a} '
+		color: pink
+		background-color: black
+		+position(absolute, auto, 100%, 100%, auto)
+		font-size: 13px!important
+		line-height: 15px!important
+		height: 15px !important
+		min-height: 15px !important
+		font-weight: normal!important
+		border-radius: 2px !important
+		display: block !important
+		padding: 0 5px !important
+		font-family: sans-serif !important
+
+// mixin for quick debugging
+=debug($i: null, $c: red, $c2: blue)
+	@if $i
+		#{$i}
+			outline: 1px dotted $c
+	@else
+		outline: 1px dotted $c2
+
+@if $debug-mode
+	+media-breakpoint-only(xs)
+		+debug('*', pink)
+	+media-breakpoint-only(sm)
+		+debug('*', fuchsia)
+	+media-breakpoint-only(md)
+		+debug('*', orange)
+	+media-breakpoint-only(lg)
+		+debug('*', blue)
+	+media-breakpoint-up(xl)
+		+debug('*', red)
+
+
+// ==============================
+// Margins and paddings
+// ==============================
+$spacings: 43 34 28 22 18
+
+@each $pad in $spacings
+	.p-#{$pad}
+		padding: ($pad * 1px)
+	.pt-#{$pad}
+		padding-top: ($pad * 1px)
+	.pr-#{$pad}
+		padding-right: ($pad * 1px)
+	.pb-#{$pad}
+		padding-bottom: ($pad * 1px)
+	.pl-#{$pad}
+		padding-left: ($pad * 1px)
+
+	// margins
+	.m-#{$pad}
+		margin: ($pad * 1px)
+	.mt-#{$pad}
+		margin-top: ($pad * 1px)
+	.mr-#{$pad}
+		margin-right: ($pad * 1px)
+	.mb-#{$pad}
+		margin-bottom: ($pad * 1px)
+	.ml-#{$pad}
+		margin-left: ($pad * 1px)

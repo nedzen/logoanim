@@ -1,0 +1,86 @@
+@import "includes/var"
+@import "includes/mxn"
+// @import "includes/mymxn/animations"
+// http://joshbroton.com/quick-fix-sass-mixins-for-css-keyframe-animations/
+
+body
+	background-color: white
+
+@keyframes move-the-object
+	0%
+	  +rotate(0)
+
+	100%
+	  +rotate(360)
+
+
+@keyframes color-pulsate
+	0%
+	  background-color: $brand-red
+
+	25%
+	  background-color: $brand-green
+
+	50%
+	  background-color: $brand-blue
+
+	75%
+	  background-color: $brand-orange
+
+	100%
+	  background-color: $brand-red
+
+@keyframes gray-pulsate
+	0%
+	  background-color: $gray
+
+	50%
+	  background-color: $gray-light
+
+	100%
+	  background-color: $gray
+
+// .logo
+//   +mx-center
+//   margin-top: 200px
+//   max-width: 500px
+//   position: relative
+
+// .element
+//   +size(100px)
+//   top: 30px
+//   left: 0px
+//   background: red
+//   position: absolute
+//   animation: move-the-object 1s infinite
+
+$szx: 100px
+
+.frame
+	&.anim-a
+		.bg:before
+			+background-image('colors2.png')
+			background-size: contain
+			animation: move-the-object 300ms linear infinite
+
+	&.anim-b
+		animation: color-pulsate 1s infinite
+
+	&.anim-c
+		animation: gray-pulsate 1s infinite
+
+	+size($szx)
+	position: relative
+	overflow: hidden
+	margin: 200px auto 0 auto
+	.lg
+		+position(stretch)
+		+background-image('logo.png')
+		background-size: contain
+		z-index: 2
+	.bg
+		z-index: 1
+		+position(absolute, 49%, 49%, 49%, 49%)
+		&::before
+			content: ''
+			+position(absolute, -2500%, -2500%, -2500%, -2500%)
