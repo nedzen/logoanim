@@ -1,10 +1,21 @@
 extends _layouts/home
 
 block head_end
-	link(rel="stylesheet" href="/css/style.css") 
+	link(rel="stylesheet" href="/css/style.css")
+	meta(keywords="testing")
 
 block content
-	include _partials/header
+	//- include _partials/gorgias
+	.frame.anim-a
+		.lg
+		.bg
+
+	.frame.anim-b
+		.lg
+		.bg
+	
+	.frame.anim-c
+		.lg
+		.bg
 
 block body_end
-	script(type="text/javascript" src="/js/script.js")
